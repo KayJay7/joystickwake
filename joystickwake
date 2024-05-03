@@ -426,6 +426,9 @@ class JoystickWatcher:
         except PermissionError:
             self._log.error("permission denied on open %s", device.device_node)
             return
+        except FileNotFoundError:
+            self._log.error("file not found %s", device.device_node)
+            return
 
         # Now that we're sure we can use the device, close any old one.
         if olddevinfo:
